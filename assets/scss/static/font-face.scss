@@ -1,0 +1,45 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("~static/fonts/SourseSansPro/SourceSansPro-Light.eot");
+  src: local("Source Sans Pro Light"), local("SourceSansPro-Light"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Light.woff") format("woff"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Light.ttf")
+      format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("~static/fonts/SourseSansPro/SourceSansPro-Regular.eot");
+  src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Regular.woff") format("woff"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-Regular.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("~static/fonts/SourseSansPro/SourceSansPro-SemiBold.eot");
+  src: local("Source Sans Pro SemiBold"), local("SourceSansPro-SemiBold"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-SemiBold.woff")
+      format("woff"),
+    url("~static/fonts/SourseSansPro/SourceSansPro-SemiBold.ttf")
+      format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}

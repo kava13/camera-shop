@@ -1,0 +1,45 @@
+//screen resolution
+
+// Mode: Desktop
+$desktop-area: 1440px;
+
+// Mode: laptop
+$max-width-laptop: 1439px;
+$laptop-area: 1124px;
+
+// Mode: Tablet
+$max-width-tablet: 1123px;
+$tablet-area: 768px;
+
+// Mode: Horizontal
+$max-width-mobile: 767px;
+$mobile-area: 100%;
+// $mobile-area: 578px;
+
+// // Mode: Mobile
+// $max-width-mobile: 577px;
+// $mobile-area: 100%;
+
+.container {
+  width: $desktop-area;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  @media screen and (max-width: $max-width-laptop) {
+    width: $laptop-area;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  @media screen and (max-width: $max-width-tablet) {
+    width: $tablet-area;
+  }
+  @media screen and (max-width: $max-width-mobile) {
+    width: $mobile-area;
+    padding: 0 20px;
+    // padding: 0 8px;
+  }
+  //   @media screen and (max-width: $max-width-mini) {
+  //     width: $mini-area;
+  //     padding: 0 20px;
+  //   }
+}
