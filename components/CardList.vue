@@ -56,6 +56,13 @@ export default {
         return this.productsById[productId];
       });
     }
+  },
+  methods: {
+    removeProduct(productId) {
+      const { [productId]: deletedProductId, ...newProductsById } = this.productsById;
+      this.productsById = newProductsById;
+      this.allProductsId = this.allProductsId.filter(elem => elem !== productId);
+    }
   }
 };
 </script>
