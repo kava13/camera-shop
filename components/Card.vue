@@ -1,14 +1,14 @@
 <template>
   <div class="card">
     <div class="card-img">
-      <img src="/img/card-img.png" alt="Камера" />
+      <img :src="product.imgUrl" alt="Камера" />
     </div>
     <div class="card-text">
       <div class="card-title">{{ product.name }}</div>
       <div class="card-description">
         {{ product.description }}
       </div>
-      <div class="card-price">10 000 руб.</div>
+      <div class="card-price">{{ product.price }} руб.</div>
     </div>
     <div class="card-delete" @click="removeProductHandler(product.id)"></div>
   </div>
@@ -16,10 +16,11 @@
 
 <script>
 export default {
-  props: ["product"],
+  props: {
+    product: Object
+  },
   methods: {
     removeProductHandler(productIdForDelete) {
-      console.log("productIdForDelete", productIdForDelete);
       this.$emit("remove-product", productIdForDelete);
     }
   }
@@ -49,7 +50,9 @@ export default {
     margin-right: 0;
   }
   .card-img {
+    text-align: center;
     margin-bottom: 16px;
+    height: 200px;
   }
   .card-text {
     flex-grow: 1;
@@ -58,6 +61,7 @@ export default {
     padding-right: 16px;
     padding-left: 16px;
     padding-bottom: 24px;
+    overflow-wrap: break-word;
     .card-title {
       font-size: 20px;
       line-height: 25px;

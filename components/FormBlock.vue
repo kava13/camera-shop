@@ -4,41 +4,22 @@
     <form action="" method="post">
       <div class="input-row">
         <label class="title" for="">Наименование товара</label>
-        <input
-          type="text"
-          v-model="$v.inputs.name.$model"
-          placeholder="Введите наименование товара"
-        />
+        <input type="text" v-model="$v.inputs.name.$model" placeholder="Введите наименование товара" />
       </div>
       <div class="input-row">
         <label class="title" for="">Описание товара</label>
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          v-model="$v.inputs.description.$model"
-          placeholder="Введите описание товара"
-        >
+        <textarea name="" id="" cols="30" rows="10" v-model="$v.inputs.description.$model" placeholder="Введите описание товара">
         </textarea>
       </div>
       <div class="input-row">
         <label class="title" for="">
           Ссылка на изображение товара
         </label>
-        <input
-          type="text"
-          v-model="$v.inputs.imgUrl.$model"
-          placeholder="Введите наименование товара"
-        />
+        <input type="text" v-model="$v.inputs.imgUrl.$model" placeholder="Введите наименование товара" />
       </div>
       <div class="input-row">
         <label class="title" for="">Цена товара</label>
-        <input
-          type="text"
-          v-model="$v.inputs.price.$model"
-          placeholder="Введите цену"
-        />
+        <input type="text" v-model="$v.inputs.price.$model" placeholder="Введите цену" />
       </div>
       <button class="add-product-btn" @click.prevent="addProduct">
         Добавить товар
@@ -50,6 +31,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
+import { nanoid } from "nanoid";
 
 export default {
   mixins: [validationMixin],
@@ -85,9 +67,22 @@ export default {
       if (this.$v.$invalid) {
         console.log("Ошибка");
       } else {
-        console.log("Добавили товар");
+        let newProduct = {
+          id: nanoid(),
+          imgUrl: this.inputs.imgUrl,
+          name: this.inputs.name,
+          description: this.inputs.description,
+          price: this.inputs.price
+        };
+        this.$emit("add-product", newProduct);
+        this.resetInputValues();
       }
-      console.log("add product ");
+    },
+    resetInputValues() {
+      this.inputs.name = "";
+      this.inputs.description = "";
+      this.inputs.imgUrl = "";
+      this.inputs.price = "";
     }
   }
 };
@@ -105,8 +100,7 @@ export default {
     color: $darks;
     padding: 24px;
     background: $primary;
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-      0px 6px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
     input,
     textarea {
