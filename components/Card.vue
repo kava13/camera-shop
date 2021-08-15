@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-img">
-      <img :src="product.imgUrl" alt="Камера" />
+      <img :src="product.imgUrl" alt="Продукт" />
     </div>
     <div class="card-text">
       <div class="card-title">{{ product.name }}</div>
