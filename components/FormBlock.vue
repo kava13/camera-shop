@@ -164,7 +164,7 @@ export default {
               height: 4px;
               background-color: $red;
               border-radius: 50%;
-              top: 0;
+              top: 4px;
               right: -4px;
             }
           }

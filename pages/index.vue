@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <Header :sortingBy.sync="sortingBy"></Header>
     <div class="page-content">
       <section class="products">
         <div class="container">
@@ -59,7 +59,8 @@ export default {
           price: "10 000"
         }
       },
-      allProductsId: [1, 2, 3, 4]
+      allProductsId: [1, 2, 3, 4],
+      sortingBy: null
     };
   },
   computed: {
