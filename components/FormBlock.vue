@@ -1,6 +1,5 @@
 <template>
   <div class="form-wr">
-    Form Block
     <form action="" method="post">
       <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.name.$error }]">
         <label class="title" for="">
@@ -43,7 +42,15 @@
             Цена товара
           </span>
         </label>
-        <input type="text" v-model="$v.inputs.price.$model" @focus="$v.inputs.price.$reset" placeholder="Введите цену" />
+        <input
+          type="text"
+          value=""
+          v-model.lazy="$v.inputs.price.$model"
+          @focus="$v.inputs.price.$reset"
+          placeholder="Введите цену"
+          v-money="money"
+        />
+        <!-- v-mask="['## ###']" -->
         <div class="error-text">Поле является обязательным</div>
       </div>
       <button class="add-product-btn" @click.prevent="addProduct">
@@ -56,9 +63,15 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
+import { VMoney } from "v-money";
+import { mask } from "vue-the-mask";
 import { nanoid } from "nanoid";
 
 export default {
+  directives: {
+    money: VMoney,
+    mask
+  },
   mixins: [validationMixin],
   data() {
     return {
@@ -67,6 +80,11 @@ export default {
         description: "",
         imgUrl: "",
         price: ""
+      },
+      money: {
+        thousands: " ",
+        precision: 0,
+        masked: false /* doesn't work with directive */
       },
       submitStatus: null
     };
@@ -82,9 +100,7 @@ export default {
       description: {},
       price: {
         required
-        // minLength: minLength(17)
       }
-      // mail: {}
     }
   },
   methods: {

@@ -6,7 +6,7 @@
         <div class="container">
           <div class="products-content">
             <FormBlock @add-product="addProduct"></FormBlock>
-            <CardList :productsList="productsList" @remove-product="removeProduct"></CardList>
+            <CardList :productsList="sortedProductsList" @remove-product="removeProduct"></CardList>
           </div>
         </div>
       </section>
@@ -31,41 +31,42 @@ export default {
         1: {
           id: 1,
           imgUrl: "/img/card-img.png",
-          name: "Наименование товара номер 1",
+          name: "АНаименование товара номер 1",
           description: "Описание товара номер 1. Оно самое короткое",
-          price: "10 000"
+          price: 10000
         },
         2: {
           id: 2,
           imgUrl: "/img/card-img.png",
-          name: "Наименование товара номер 2",
+          name: "ДНаименование товара номер 2",
           description: "Описание товара номер 2. Довольно-таки интересное описание товара в несколько строк",
-          price: "10 000"
+          price: 11000
         },
         3: {
           id: 3,
           imgUrl: "/img/card-img.png",
-          name: "Наименование товара номер 3. Супер товар",
+          name: "ВНаименование товара номер 3. Супер товар",
           description:
             "Описание товара номер 3. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10 000"
+          price: 12000
         },
         4: {
           id: 4,
           imgUrl: "/img/card-img.png",
-          name: "Наименование товара номер 4. Этот товар просто разрывная бомба пушка",
+          name: "ГНаименование товара номер 4. Этот товар просто разрывная бомба пушка",
           description:
             "Описание товара номер 4. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-          price: "10 000"
+          price: 12500
         }
       },
       allProductsId: [1, 2, 3, 4],
-      sortingBy: null
+      sortingBy: "default"
     };
   },
   computed: {
-    productsList() {
-      return this.allProductsId.map(productId => this.productsById[productId]);
+    sortedProductsList() {
+      let productsList = this.allProductsId.map(productId => this.productsById[productId]);
+      return this.sortProductsList(productsList);
     }
   },
   methods: {
@@ -80,6 +81,34 @@ export default {
     addProduct(newProduct) {
       this.productsById[newProduct.id] = newProduct;
       this.allProductsId.push(newProduct.id);
+    },
+    sortProductsList(productsList) {
+      return productsList.sort((item, nextItem) => {
+        if (this.sortingBy === "default") {
+          return;
+        }
+
+        if (this.sortingBy === "name") {
+          if (item.name.toLowerCase() > nextItem.name.toLowerCase()) return 1;
+          if (item.name.toLowerCase() < nextItem.name.toLowerCase()) return -1;
+
+          return 0;
+        }
+
+        if (this.sortingBy === "price-desc") {
+          if (item.price > nextItem.price) return -1;
+          if (item.price < nextItem.price) return 1;
+
+          return 0;
+        }
+
+        if (this.sortingBy === "price-asc") {
+          if (item.price < nextItem.price) return -1;
+          if (item.price > nextItem.price) return 1;
+
+          return 0;
+        }
+      });
     }
   }
 };

@@ -8,10 +8,9 @@
         <div class="header-filter">
           <select name="" id="" @change="changeSortingFilter">
             <option value="default">По умолчанию</option>
-            <option value="name-desc">По алфавиту (по убыванию)</option>
-            <option value="name-asc">По алфавиту (по возрастанию)</option>
-            <option value="name-desc">По цене (по убыванию)</option>
-            <option value="name-asc">По цене (по возрастанию)</option>
+            <option value="name">По алфавиту</option>
+            <option value="price-desc">По цене (по убыванию)</option>
+            <option value="price-asc">По цене (по возрастанию)</option>
           </select>
         </div>
       </div>
@@ -31,6 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
+  margin-top: 32px;
   margin-bottom: 16px;
   .header-wr {
     display: flex;
