@@ -37,13 +37,22 @@
         <input type="text" v-model="$v.inputs.imgUrl.$model" @focus="$v.inputs.imgUrl.$reset" placeholder="Введите ссылку" />
         <div class="error-text">Поле является обязательным</div>
       </div>
-      <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.price.$error }]">
+      <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.formattedPrice.$error }]">
         <label class="title" for="">
           <span>
             Цена товара
           </span>
         </label>
-        <input type="text" v-model="$v.inputs.price.$model" @focus="$v.inputs.price.$reset" placeholder="Введите цену" />
+        <input
+          type="text"
+          :value="$v.inputs.formattedPrice.$model"
+          @input="formatPrice"
+          @focus="$v.inputs.formattedPrice.$reset"
+          placeholder="Введите цену"
+        />
+        <!-- v-model="$v.inputs.price.$model" -->
+        <!-- v-money="money" -->
+        <!-- v-mask="['## ###']" -->
         <div class="error-text">Поле является обязательным</div>
       </div>
       <button class="add-product-btn" @click.prevent="addProduct">
@@ -62,11 +71,12 @@ export default {
   mixins: [validationMixin],
   data() {
     return {
+      priceWithoutFormatting: null,
       inputs: {
         name: "",
         description: "",
         imgUrl: "",
-        price: ""
+        formattedPrice: ""
       },
       submitStatus: null
     };
@@ -80,7 +90,7 @@ export default {
         required
       },
       description: {},
-      price: {
+      formattedPrice: {
         required
         // minLength: minLength(17)
       }
@@ -100,7 +110,7 @@ export default {
           imgUrl: this.inputs.imgUrl,
           name: this.inputs.name,
           description: this.inputs.description,
-          price: this.inputs.price
+          price: this.inputs.formattedPrice
         };
         this.$emit("add-product", newProduct);
         setTimeout(() => {
@@ -113,7 +123,26 @@ export default {
       this.inputs.name = "";
       this.inputs.description = "";
       this.inputs.imgUrl = "";
-      this.inputs.price = "";
+      this.inputs.formattedPrice = "";
+    },
+    formatPrice() {
+      let value = event.target.value;
+      // Удаляем все пробелы
+      let clearValue = value.replace(/\D/g, "");
+      console.log("value without spaces ", clearValue);
+
+      const isOnlyNumbers = /^\d+$/.test(value);
+
+      if (!isOnlyNumbers) {
+        event.target.value = clearValue;
+      }
+
+      console.log("value before formatting", value);
+
+      value = new Intl.NumberFormat("ru").format(+value);
+      console.log("value after formatting", value);
+
+      this.$v.inputs.formattedPrice.$model = value;
     }
   }
 };
