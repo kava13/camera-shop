@@ -1,7 +1,7 @@
 <template>
   <div class="form-wr">
     <form action="" method="post">
-      <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.name.$error }]">
+      <div :class="['input-row', 'input-required', { 'input-error': submitStatus === 'ERROR' && $v.inputs.name.$error }]">
         <label class="title" for="">
           <span>
             Наименование товара
@@ -27,7 +27,7 @@
         >
         </textarea>
       </div>
-      <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.imgUrl.$error }]">
+      <div :class="['input-row', 'input-required', { 'input-error': submitStatus === 'ERROR' && $v.inputs.imgUrl.$error }]">
         <label class="title" for="">
           <span>
             Ссылка на изображение товара
@@ -36,7 +36,7 @@
         <input type="text" v-model="$v.inputs.imgUrl.$model" @focus="$v.inputs.imgUrl.$reset" placeholder="Введите ссылку" />
         <div class="error-text">Поле является обязательным</div>
       </div>
-      <div :class="['input-row', 'input-required', { 'input-error': $v.inputs.formattedPrice.$error }]">
+      <div :class="['input-row', 'input-required', { 'input-error': submitStatus === 'ERROR' && $v.inputs.formattedPrice.$error }]">
         <label class="title" for="">
           <span>
             Цена товара
@@ -49,12 +49,9 @@
           @focus="$v.inputs.formattedPrice.$reset"
           placeholder="Введите цену"
         />
-        <!-- v-model="$v.inputs.price.$model" -->
-        <!-- v-money="money" -->
-        <!-- v-mask="['## ###']" -->
         <div class="error-text">Поле является обязательным</div>
       </div>
-      <button class="add-product-btn" @click.prevent="addProduct">
+      <button class="add-product-btn" :disabled="!isFormValid" @click.prevent="addProduct">
         Добавить товар
       </button>
     </form>
@@ -64,15 +61,9 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
-import { VMoney } from "v-money";
-import { mask } from "vue-the-mask";
 import { nanoid } from "nanoid";
 
 export default {
-  directives: {
-    money: VMoney,
-    mask
-  },
   mixins: [validationMixin],
   data() {
     return {
@@ -82,11 +73,6 @@ export default {
         description: "",
         imgUrl: "",
         formattedPrice: ""
-      },
-      money: {
-        thousands: " ",
-        precision: 0,
-        masked: false /* doesn't work with directive */
       },
       submitStatus: null
     };
@@ -103,6 +89,11 @@ export default {
       formattedPrice: {
         required
       }
+    }
+  },
+  computed: {
+    isFormValid() {
+      return this.inputs.name.length > 0 && this.inputs.imgUrl.length > 0 && this.inputs.formattedPrice.length > 0;
     }
   },
   methods: {
@@ -135,22 +126,33 @@ export default {
     },
     formatPrice() {
       let value = event.target.value;
-      // Удаляем все пробелы
-      let clearValue = value.replace(/\D/g, "");
-      console.log("value without spaces ", clearValue);
+      // Удаляем пробелы
+      let clearValue = value.replace(/\s+/g, "");
 
-      const isOnlyNumbers = /^\d+$/.test(value);
-
-      if (!isOnlyNumbers) {
-        event.target.value = clearValue;
+      const isOnlyNumbers = /^\d+$/.test(clearValue);
+      console.log("isOnlyNumbers ? ", isOnlyNumbers);
+      if (!isOnlyNumbers && value.length !== 0) {
+        event.target.value = this.inputs.formattedPrice;
+        return;
       }
 
-      console.log("value before formatting", value);
+      if (value.length === 0) {
+        console.log("value length === 0");
+        event.target.value = "";
+        this.priceWithoutFormatting = "";
+        this.inputs.formattedPrice = null;
+        return;
+      }
 
-      value = new Intl.NumberFormat("ru").format(+value);
+      console.log("value before formatting", clearValue);
+      value = new Intl.NumberFormat("ru").format(parseInt(clearValue));
       console.log("value after formatting", value);
 
-      this.$v.inputs.formattedPrice.$model = value;
+      console.log("🚀 ~ value type", typeof value);
+      console.log("🚀 ~ clearValue", typeof parseInt(clearValue));
+
+      this.priceWithoutFormatting = parseInt(clearValue);
+      this.inputs.formattedPrice = value;
     }
   }
 };
@@ -182,6 +184,9 @@ export default {
       border-radius: 4px;
       &::placeholder {
         color: $grey;
+      }
+      &:focus {
+        border: 1px solid $grey;
       }
     }
     .input-row {
@@ -241,6 +246,11 @@ export default {
       padding: 10px;
       border: none;
       border-radius: 10px;
+      &:not(:disabled) {
+        cursor: pointer;
+        background-color: #7bae73;
+        color: $primary;
+      }
     }
   }
 }
