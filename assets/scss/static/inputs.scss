@@ -1,0 +1,65 @@
+input,
+textarea {
+  width: 100%;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 10px 16px;
+  background: $primary;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  &::placeholder {
+    color: $grey;
+  }
+  &:focus {
+    border: 1px solid $grey;
+  }
+}
+
+.input-row {
+  position: relative;
+  &:not(:last-child) {
+    margin-bottom: 22px;
+  }
+  &.input-required {
+    .title {
+      span {
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          display: block;
+          width: 4px;
+          height: 4px;
+          background-color: $red;
+          border-radius: 50%;
+          top: 4px;
+          right: -4px;
+        }
+      }
+    }
+  }
+  &.input-error {
+    input {
+      border: 1px solid $red;
+    }
+    .error-text {
+      display: block;
+    }
+  }
+  .title {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .error-text {
+    display: none;
+    position: absolute;
+    color: $red;
+    font-size: 10px;
+    line-height: 12px;
+    bottom: -16px;
+  }
+}
