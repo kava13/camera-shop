@@ -6,6 +6,7 @@
         <div class="container">
           <div class="products-content">
             <FormBlock @add-product="addProduct"></FormBlock>
+
             <CardList :productsList="sortedProductsList" @remove-product="removeProduct"></CardList>
           </div>
         </div>
@@ -30,21 +31,21 @@ export default {
       productsById: {
         1: {
           id: 1,
-          imgUrl: "/img/card-img.png",
+          imgUrl: "https://i.ibb.co/Rz4Dxd8/card-img.png",
           name: "АНаименование товара номер 1",
           description: "Описание товара номер 1. Оно самое короткое",
           price: 10000
         },
         2: {
           id: 2,
-          imgUrl: "/img/card-img.png",
+          imgUrl: "https://i.ibb.co/Rz4Dxd8/card-img.png",
           name: "ДНаименование товара номер 2",
           description: "Описание товара номер 2. Довольно-таки интересное описание товара в несколько строк",
           price: 11000
         },
         3: {
           id: 3,
-          imgUrl: "/img/card-img.png",
+          imgUrl: "https://i.ibb.co/Rz4Dxd8/card-img.png",
           name: "ВНаименование товара номер 3. Супер товар",
           description:
             "Описание товара номер 3. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
@@ -52,7 +53,7 @@ export default {
         },
         4: {
           id: 4,
-          imgUrl: "/img/card-img.png",
+          imgUrl: "https://i.ibb.co/Rz4Dxd8/card-img.png",
           name: "ГНаименование товара номер 4. Этот товар просто разрывная бомба пушка",
           description:
             "Описание товара номер 4. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
