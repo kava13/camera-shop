@@ -11,21 +11,6 @@
       <PriceInput :inputValue.sync="inputs.formattedPrice" :placeholderText="'Введите цену'">
         Цена товара
       </PriceInput>
-      <!-- <div :class="['input-row', 'input-required', { 'input-error': submitStatus === 'ERROR' && $v.inputs.formattedPrice.$error }]">
-        <label class="title" for="">
-          <span>
-            Цена товара
-          </span>
-        </label>
-        <input
-          type="text"
-          :value="$v.inputs.formattedPrice.$model"
-          @input="formatPrice"
-          @focus="$v.inputs.formattedPrice.$reset"
-          placeholder="Введите цену"
-        />
-        <div class="error-text">Поле является обязательным</div>
-      </div> -->
       <button class="add-product-btn" :disabled="!isFormValid" @click.prevent="addProduct">
         Добавить товар
       </button>
@@ -96,9 +81,9 @@ export default {
           imgUrl: this.inputs.imgUrl,
           name: this.inputs.name,
           description: this.inputs.description,
-          price: this.inputs.formattedPrice
+          price: this.priceWithoutFormatting
         };
-        this.$emit("add-product", newProduct);
+        this.$store.commit("addProduct", newProduct);
         setTimeout(() => {
           this.submitStatus = "OK";
         }, 1000);
