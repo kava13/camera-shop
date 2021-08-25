@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from "vuex";
-import CardContentPreloader from "/components/CardContentPreloader";
+import { mapState } from "vuex";
+import CardContentPreloader from "/components/card-list/CardContentPreloader";
 
 export default {
   components: {
