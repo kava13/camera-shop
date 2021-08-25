@@ -29,7 +29,8 @@ export default {
     scss: [
       "./assets/scss/static/font-face.scss",
       "./assets/scss/static/variables.scss",
-      "./assets/scss/layout/layout.scss"
+      "./assets/scss/layout/layout.scss",
+      "./assets/scss/static/animations.scss"
     ]
   },
 
@@ -39,10 +40,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
-      plugins: [
-        "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-proposal-private-methods"
-      ]
+      plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-private-methods"]
     }
   }
 };

@@ -1,14 +1,10 @@
 <template>
   <div class="card">
-    <content-loader v-if="!isLoading" :width="400" :height="540" :speed="2" primaryColor="#f3f3f3" secondaryColor="#cccccc" uniqueKey="1">
-      <rect x="0" y="0" rx="0" ry="0" width="400" height="242" />
-      <rect x="16" y="259" rx="0" ry="0" width="243" height="31"></rect>
-      <rect x="16" y="310" rx="0" ry="0" width="362" height="130"></rect>
-      <rect x="16" y="465" rx="0" ry="0" width="170" height="37"></rect>
-    </content-loader>
+    <CardContentPreloader v-if="isCardListLoading"></CardContentPreloader>
     <template v-else>
       <div class="card-img">
-        <img :src="isImgUrlValid ? product.imgUrl : '/img/default-img.jpg'" alt="Продукт" />
+        <div v-if="isImgLoading" class="card-img__preloader"></div>
+        <img @load="changeImgLoading" :src="isImgUrlValid ? product.imgUrl : '/img/default-img.jpg'" alt="Продукт" />
       </div>
       <div class="card-text">
         <div class="card-title">{{ product.name }}</div>
@@ -23,31 +19,34 @@
 </template>
 
 <script>
-import { ContentLoader } from "vue-content-loader";
+import { mapMutations, mapState, mapActions } from "vuex";
+import CardContentPreloader from "/components/CardContentPreloader";
 
 export default {
   components: {
-    ContentLoader
+    CardContentPreloader
   },
   props: {
+    isCardListLoading: Boolean,
     product: Object
   },
   data() {
     return {
-      isLoading: false
+      isImgLoading: true
     };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = true;
-    }, 2000);
   },
   computed: {
     isImgUrlValid() {
       return /^https?:\/\/.*\.(?:jpe?g|gif|png)$/gi.test(this.product.imgUrl);
-    }
+    },
+    ...mapState(["kavaValue"])
   },
   methods: {
+    changeImgLoading() {
+      setTimeout(() => {
+        this.isImgLoading = false;
+      }, 1000);
+    },
     removeProductHandler(productIdForDelete) {
       this.$emit("remove-product", productIdForDelete);
     }
@@ -86,6 +85,7 @@ export default {
     }
   }
   .card-img {
+    position: relative;
     text-align: center;
     margin-bottom: 16px;
     height: 200px;

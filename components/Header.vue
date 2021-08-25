@@ -22,7 +22,7 @@
 export default {
   methods: {
     changeSortingFilter() {
-      this.$emit("update:sortingBy", event.target.value);
+      this.$store.commit("setSortingBy", event.target.value);
     }
   }
 };
