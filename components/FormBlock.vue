@@ -1,10 +1,12 @@
 <template>
   <div class="form-wr">
-    <form action="" method="post">
+    <form action="addProduct" method="post">
       <BaseInput :inputValue.sync="inputs.name" :placeholderText="'Введите наименование товара'">
         Наименование товара
       </BaseInput>
-      <BaseTextarea :textareaValue.sync="inputs.description"></BaseTextarea>
+      <BaseTextarea :textareaValue.sync="inputs.description" :placeholderText="'Введите описание товара'">
+        Описание товара
+      </BaseTextarea>
       <BaseInput :inputValue.sync="inputs.imgUrl" :placeholderText="'Введите ссылку'">
         Ссылка на изображение
       </BaseInput>
@@ -23,9 +25,9 @@ import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
 import { nanoid } from "nanoid";
 
-import BaseInput from "./BaseInput";
-import PriceInput from "./PriceInput";
-import BaseTextarea from "./BaseTextarea";
+import BaseInput from "/components/base/BaseInput";
+import PriceInput from "/components/base/PriceInput";
+import BaseTextarea from "/components/base/BaseTextarea";
 
 export default {
   components: {
@@ -42,8 +44,7 @@ export default {
         imgUrl: "",
         formattedPrice: ""
       },
-      submitStatus: null,
-      isShowErrors: false
+      submitStatus: null
     };
   },
   validations: {

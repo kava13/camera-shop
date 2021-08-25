@@ -1,20 +1,20 @@
 <template>
-  <transition-group class="cards-list" name="cards-list" tag="div">
-    <template v-for="(item, index) in productsList">
+  <transition-group class="card-list" name="card-list" tag="div">
+    <template v-for="(item, index) in productList">
       <Card :isCardListLoading="isLoading" :product="item" @remove-product="removeProduct" :key="item.id"></Card>
     </template>
   </transition-group>
 </template>
 
 <script>
-import Card from "/components/Card";
+import Card from "/components/card-list/Card";
 
 export default {
   components: {
     Card
   },
   props: {
-    productsList: Array
+    productList: Array
   },
   data() {
     return {
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cards-list {
+.card-list {
   display: flex;
   flex-wrap: wrap;
   position: relative;

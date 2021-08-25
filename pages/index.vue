@@ -1,65 +1,53 @@
 <template>
   <div>
-    <Header></Header>
-    <div class="page-content">
-      <section class="products">
-        <div class="container">
-          <div class="products-content">
-            <FormBlock></FormBlock>
-            <CardList :productsList="sortedProductsList"></CardList>
-          </div>
+    <section class="products">
+      <div class="container">
+        <div class="products-content">
+          <FormBlock></FormBlock>
+          <CardList :productList="sortedProductList"></CardList>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
-import Header from "/components/Header";
 import FormBlock from "/components/FormBlock";
-import CardList from "/components/CardList";
+import CardList from "/components/card-list/CardList";
 
 export default {
   components: {
-    Header,
     FormBlock,
     CardList
   },
   computed: {
-    ...mapState({
-      productsById: state => state.productsById,
-      allProductsId: state => state.allProductsId,
-      sortingBy: state => state.sortingBy
-    }),
-    sortedProductsList() {
-      let productsList = this.allProductsId.map(productId => this.productsById[productId]);
-      return this.sortProductsList(productsList);
+    sortedProductList() {
+      let productList = this.$store.state.allProductsId.map(productId => this.$store.state.productsById[productId]);
+      return this.sortProductList(productList);
     }
   },
   methods: {
-    sortProductsList(productsList) {
-      return productsList.sort((item, nextItem) => {
-        if (this.sortingBy === "default") {
+    sortProductList(productList) {
+      return productList.sort((item, nextItem) => {
+        if (this.$store.state.sortingBy === "default") {
           return;
         }
 
-        if (this.sortingBy === "name") {
+        if (this.$store.state.sortingBy === "name") {
           if (item.name.toLowerCase() > nextItem.name.toLowerCase()) return 1;
           if (item.name.toLowerCase() < nextItem.name.toLowerCase()) return -1;
 
           return 0;
         }
 
-        if (this.sortingBy === "price-desc") {
+        if (this.$store.state.sortingBy === "price-desc") {
           if (item.price > nextItem.price) return -1;
           if (item.price < nextItem.price) return 1;
 
           return 0;
         }
 
-        if (this.sortingBy === "price-asc") {
+        if (this.$store.state.sortingBy === "price-asc") {
           if (item.price < nextItem.price) return -1;
           if (item.price > nextItem.price) return 1;
 
@@ -74,7 +62,6 @@ export default {
 <style lang="scss" scoped>
 .products-content {
   display: flex;
-  // margin-right: -16px;
   @media screen and (max-width: $max-width-mobile) {
     flex-direction: column;
   }

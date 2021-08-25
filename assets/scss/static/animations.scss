@@ -1,16 +1,16 @@
 // Vue transition
-.cards-list-enter-active,
-.cards-list-leave-active {
+.card-list-enter-active,
+.card-list-leave-active {
   transition: all 0.5s ease;
 }
 
-.cards-list-enter,
-.cards-list-leave-to {
+.card-list-enter,
+.card-list-leave-to {
   opacity: 0;
   transform: translateY(10px);
 }
 
-.cards-list-move {
+.card-list-move {
   transition: transform 0.8s ease;
 }
 
