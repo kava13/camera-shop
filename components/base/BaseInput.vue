@@ -15,11 +15,11 @@ export default {
   props: {
     inputValue: String,
     placeholderText: String,
-    inputId: String
+    inputId: String,
   },
   data() {
     return {
-      isInputValueValid: true
+      isInputValueValid: true,
     };
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
     },
     setIsInputValueValid(inputValue) {
       this.isInputValueValid = inputValue.length === 0 ? false : true;
-    }
-  }
+    },
+  },
 };
 </script>

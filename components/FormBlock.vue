@@ -22,18 +22,18 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 import { nanoid } from "nanoid";
 
-import BaseInput from "/components/base/BaseInput";
-import PriceInput from "/components/base/PriceInput";
-import BaseTextarea from "/components/base/BaseTextarea";
+import BaseInput from "@/components/base/BaseInput.vue";
+import PriceInput from "@/components/base/PriceInput.vue";
+import BaseTextarea from "@/components/base/BaseTextarea.vue";
 
 export default {
   components: {
     BaseInput,
     PriceInput,
-    BaseTextarea
+    BaseTextarea,
   },
   mixins: [validationMixin],
   data() {
@@ -42,32 +42,32 @@ export default {
         name: "",
         description: "",
         imgUrl: "",
-        formattedPrice: ""
+        formattedPrice: "",
       },
-      submitStatus: null
+      submitStatus: null,
     };
   },
   validations: {
     inputs: {
       name: {
-        required
+        required,
       },
       imgUrl: {
-        required
+        required,
       },
       description: {},
       formattedPrice: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   computed: {
     isFormValid() {
       return this.inputs.name?.length > 0 && this.inputs.imgUrl?.length > 0 && this.inputs.formattedPrice?.length > 0;
     },
     priceWithoutFormatting() {
-      return parseInt(this.inputs.formattedPrice.replace(/\s+/g, ""));
-    }
+      return parseInt(this.inputs.formattedPrice.replace(/\s+/g, ""), 10);
+    },
   },
   methods: {
     addProduct() {
@@ -77,12 +77,12 @@ export default {
         this.submitStatus = "ERROR";
       } else {
         this.submitStatus = "PENDING";
-        let newProduct = {
+        const newProduct = {
           id: nanoid(),
           imgUrl: this.inputs.imgUrl,
           name: this.inputs.name,
           description: this.inputs.description,
-          price: this.priceWithoutFormatting
+          price: this.priceWithoutFormatting,
         };
         this.$store.commit("addProduct", newProduct);
         setTimeout(() => {
@@ -96,8 +96,8 @@ export default {
       this.inputs.description = "";
       this.inputs.imgUrl = "";
       this.inputs.formattedPrice = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

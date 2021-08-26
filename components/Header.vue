@@ -23,8 +23,8 @@ export default {
   methods: {
     changeSortingFilter() {
       this.$store.commit("setSortingBy", event.target.value);
-    }
-  }
+    },
+  },
 };
 </script>
 

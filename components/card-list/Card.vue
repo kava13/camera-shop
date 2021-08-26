@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import CardContentPreloader from "/components/card-list/CardContentPreloader";
+import CardContentPreloader from "@/components/card-list/CardContentPreloader.vue";
 
 export default {
   components: {

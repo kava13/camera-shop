@@ -15,12 +15,12 @@ export default {
   props: {
     textareaValue: String,
     placeholderText: String,
-    textareaId: String
+    textareaId: String,
   },
   methods: {
     updateTextareaValue() {
       this.$emit("update:textareaValue", event.target.value);
-    }
-  }
+    },
+  },
 };
 </script>

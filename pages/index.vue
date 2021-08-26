@@ -12,19 +12,19 @@
 </template>
 
 <script>
-import FormBlock from "/components/FormBlock";
-import CardList from "/components/card-list/CardList";
+import FormBlock from "@/components/FormBlock.vue";
+import CardList from "@/components/card-list/CardList.vue";
 
 export default {
   components: {
     FormBlock,
-    CardList
+    CardList,
   },
   computed: {
     sortedProductList() {
-      let productList = this.$store.state.allProductsId.map(productId => this.$store.state.productsById[productId]);
+      const productList = this.$store.state.allProductsId.map((productId) => this.$store.state.productsById[productId]);
       return this.sortProductList(productList);
-    }
+    },
   },
   methods: {
     sortProductList(productList) {
@@ -54,8 +54,8 @@ export default {
           return 0;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

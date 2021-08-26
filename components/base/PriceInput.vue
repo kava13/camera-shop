@@ -14,16 +14,16 @@
 export default {
   props: {
     inputValue: String,
-    placeholderText: String
+    placeholderText: String,
   },
   data() {
     return {
-      isInputValueValid: true
+      isInputValueValid: true,
     };
   },
   methods: {
     updateInputValue() {
-      let formattedValue = this.changePriceFormat();
+      const formattedValue = this.changePriceFormat();
 
       // Если мы изменили вид цены, а не обработали крайний случай, то ставим новое значение
       if (formattedValue) {
@@ -38,7 +38,7 @@ export default {
       let value = event.target.value;
 
       // Удаляем пробелы
-      let clearValue = value.replace(/\s+/g, "");
+      const clearValue = value.replace(/\s+/g, "");
       // Проверяем только ли цифры в цене (нет ли букв или пробелов)
       const isOnlyNumbers = /^\d+$/.test(clearValue);
 
@@ -56,9 +56,9 @@ export default {
         return;
       }
 
-      value = new Intl.NumberFormat("ru").format(parseInt(clearValue));
+      value = new Intl.NumberFormat("ru").format(parseInt(clearValue, 10));
       return value;
-    }
-  }
+    },
+  },
 };
 </script>
