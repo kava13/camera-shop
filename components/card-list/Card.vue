@@ -13,7 +13,7 @@
         </div>
         <div class="card-price">{{ product.price }} руб.</div>
       </div>
-      <div class="card-delete" @click="removeProductHandler(product.id)"></div>
+      <div class="card-delete" @click="removeProduct(product.id)"></div>
     </template>
   </div>
 </template>
@@ -23,21 +23,21 @@ import CardContentPreloader from "/components/card-list/CardContentPreloader";
 
 export default {
   components: {
-    CardContentPreloader
+    CardContentPreloader,
   },
   props: {
     isCardListLoading: Boolean,
-    product: Object
+    product: Object,
   },
   data() {
     return {
-      isImgLoading: true
+      isImgLoading: true,
     };
   },
   computed: {
     isImgUrlValid() {
       return /^https?:\/\/.*\.(?:jpe?g|gif|png)$/gi.test(this.product.imgUrl);
-    }
+    },
   },
   methods: {
     changeImgLoading() {
@@ -45,10 +45,10 @@ export default {
         this.isImgLoading = false;
       }, 1000);
     },
-    removeProductHandler(productIdForDelete) {
-      this.$emit("remove-product", productIdForDelete);
-    }
-  }
+    removeProduct(productIdForDelete) {
+      this.$store.commit("removeProduct", productIdForDelete);
+    },
+  },
 };
 </script>
 

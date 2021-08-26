@@ -1,7 +1,7 @@
 <template>
   <transition-group class="card-list" name="card-list" tag="div">
     <template v-for="(item, index) in productList">
-      <Card :isCardListLoading="isLoading" :product="item" @remove-product="removeProduct" :key="item.id"></Card>
+      <Card :isCardListLoading="isLoading" :product="item" :key="item.id"></Card>
     </template>
   </transition-group>
 </template>
@@ -11,14 +11,14 @@ import Card from "/components/card-list/Card";
 
 export default {
   components: {
-    Card
+    Card,
   },
   props: {
-    productList: Array
+    productList: Array,
   },
   data() {
     return {
-      isLoading: true
+      isLoading: true,
     };
   },
   mounted() {
@@ -26,11 +26,6 @@ export default {
       this.isLoading = false;
     }, 2000);
   },
-  methods: {
-    removeProduct(productId) {
-      this.$store.commit("removeProduct", productId);
-    }
-  }
 };
 </script>
 
