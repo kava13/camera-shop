@@ -41,17 +41,14 @@ export default {
   position: relative;
   width: calc(100% - 332px - 16px + 16px);
   margin-right: -16px;
-  &.loading {
-    *::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: hsla(0, 0%, 100%, 0.5);
-      z-index: 100;
-    }
+  @media screen and (max-width: $max-width-laptop) {
+    justify-content: flex-end;
+  }
+  @media screen and (max-width: $max-width-mobile) {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-right: 0;
   }
 }
 </style>

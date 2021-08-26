@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import CardContentPreloader from "/components/card-list/CardContentPreloader";
 
 export default {
@@ -38,8 +37,7 @@ export default {
   computed: {
     isImgUrlValid() {
       return /^https?:\/\/.*\.(?:jpe?g|gif|png)$/gi.test(this.product.imgUrl);
-    },
-    ...mapState(["kavaValue"])
+    }
   },
   methods: {
     changeImgLoading() {
@@ -93,6 +91,8 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
     }
   }
   .card-text {

@@ -1,11 +1,11 @@
 <template>
   <div :class="['input-row', 'input-required', { 'input-error': !isInputValueValid }]">
-    <label class="title" for="">
+    <label class="title" :for="inputId">
       <span>
         <slot></slot>
       </span>
     </label>
-    <input type="text" @input="updateInputValue" :value="inputValue" :placeholder="placeholderText" />
+    <input type="text" @input="updateInputValue" :value="inputValue" :placeholder="placeholderText" :id="inputId" />
     <div class="error-text">Поле является обязательным</div>
   </div>
 </template>
@@ -14,7 +14,8 @@
 export default {
   props: {
     inputValue: String,
-    placeholderText: String
+    placeholderText: String,
+    inputId: String
   },
   data() {
     return {

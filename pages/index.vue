@@ -64,6 +64,7 @@ export default {
   display: flex;
   @media screen and (max-width: $max-width-mobile) {
     flex-direction: column;
+    align-items: center;
   }
 }
 </style>

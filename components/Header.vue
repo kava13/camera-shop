@@ -35,10 +35,16 @@ header {
   .header-wr {
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: $max-width-mobile) {
+      flex-direction: column;
+    }
     .header-title {
       font-weight: 600;
       font-size: 28px;
       line-height: 35px;
+      @media screen and (max-width: $max-width-mobile) {
+        margin-bottom: 15px;
+      }
     }
     .header-filter {
       select {

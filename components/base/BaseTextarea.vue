@@ -1,11 +1,11 @@
 <template>
   <div class="input-row">
-    <label class="title" for="">
+    <label class="title" :for="textareaId">
       <span>
         <slot></slot>
       </span>
     </label>
-    <textarea name="" id="" cols="30" rows="10" :value="textareaValue" @input="updateTextareaValue" :placeholder="placeholderText">
+    <textarea :id="textareaId" cols="30" rows="10" :value="textareaValue" @input="updateTextareaValue" :placeholder="placeholderText">
     </textarea>
   </div>
 </template>
@@ -14,7 +14,8 @@
 export default {
   props: {
     textareaValue: String,
-    placeholderText: String
+    placeholderText: String,
+    textareaId: String
   },
   methods: {
     updateTextareaValue() {

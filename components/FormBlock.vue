@@ -1,20 +1,20 @@
 <template>
   <div class="form-wr">
     <form action="addProduct" method="post">
-      <BaseInput :inputValue.sync="inputs.name" :placeholderText="'Введите наименование товара'">
+      <BaseInput :inputValue.sync="inputs.name" :placeholderText="'Введите наименование товара'" :inputId="'name'">
         Наименование товара
       </BaseInput>
-      <BaseTextarea :textareaValue.sync="inputs.description" :placeholderText="'Введите описание товара'">
+      <BaseTextarea :textareaValue.sync="inputs.description" :placeholderText="'Введите описание товара'" :textareaId="'description'">
         Описание товара
       </BaseTextarea>
-      <BaseInput :inputValue.sync="inputs.imgUrl" :placeholderText="'Введите ссылку'">
+      <BaseInput :inputValue.sync="inputs.imgUrl" :placeholderText="'Введите ссылку'" :inputId="'imgUrl'">
         Ссылка на изображение
       </BaseInput>
-      <PriceInput :inputValue.sync="inputs.formattedPrice" :placeholderText="'Введите цену'">
+      <PriceInput :inputValue.sync="inputs.formattedPrice" :placeholderText="'Введите цену'" :inputId="'price'">
         Цена товара
       </PriceInput>
-      <button class="add-product-btn" :disabled="!isFormValid" @click.prevent="addProduct">
-        Добавить товар
+      <button class="add-product-btn" :disabled="!isFormValid || submitStatus === 'PENDING'" @click.prevent="addProduct">
+        {{ submitStatus === "PENDING" ? "Идет добавление товара..." : "Добавить товар" }}
       </button>
     </form>
   </div>
@@ -87,8 +87,8 @@ export default {
         this.$store.commit("addProduct", newProduct);
         setTimeout(() => {
           this.submitStatus = "OK";
+          this.resetInputValues();
         }, 1000);
-        this.resetInputValues();
       }
     },
     resetInputValues() {
@@ -107,7 +107,9 @@ export default {
   flex-shrink: 0;
   margin-right: 16px;
   @media screen and (max-width: $max-width-mobile) {
+    width: 100%;
     margin-right: 0;
+    margin-bottom: 30px;
   }
   form {
     color: $darks;
