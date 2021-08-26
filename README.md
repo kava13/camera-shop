@@ -1,5 +1,15 @@
-# camera-shop
-Тестовое задание в компанию IdaProject
+# Тестовое задание idaproject
 
-Само задание:
-https://frontend-test.idalite.com/
+> #### Ссылка на задание: [https://frontend-test.idalite.com/](https://frontend-test.idalite.com/)
+
+## Запуск:
+```
+git clone https://github.com/kava13/camera-shop.git
+cd camera-shop
+npm install
+npm run dev
+```
+## Некоторые уточнения:
+- Оставил некоторое стартовое состояние, чтобы изначально список продуктов не был пустым
+- Сначала хотел реализовать все это с помощью fakeAPI и запросов, но потом воздержался от этой идеи, поэтому моментами могут быть избыточные прокидывания
+- Чтобы вернуть список продуктов к первоначальному состоянию, нужно очистить значение 'vuex' в Local Storage
