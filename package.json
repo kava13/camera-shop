@@ -14,7 +14,6 @@
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.7",
     "vue-content-loader": "^0.2.3",
-    "vuelidate": "^0.7.6",
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {

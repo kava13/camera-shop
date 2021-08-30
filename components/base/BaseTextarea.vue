@@ -5,8 +5,7 @@
         <slot></slot>
       </span>
     </label>
-    <textarea :id="textareaId" cols="30" rows="10" :value="textareaValue" @input="updateTextareaValue" :placeholder="placeholderText">
-    </textarea>
+    <textarea :id="textareaId" :value="textareaValue" @input="updateTextareaValue" :placeholder="placeholderText"> </textarea>
   </div>
 </template>
 

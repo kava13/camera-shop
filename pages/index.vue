@@ -4,7 +4,7 @@
       <div class="container">
         <div class="products-content">
           <FormBlock></FormBlock>
-          <CardList :productList="sortedProductList"></CardList>
+          <CardList></CardList>
         </div>
       </div>
     </section>
@@ -19,42 +19,6 @@ export default {
   components: {
     FormBlock,
     CardList
-  },
-  computed: {
-    sortedProductList() {
-      let productList = this.$store.state.allProductsId.map(productId => this.$store.state.productsById[productId]);
-      return this.sortProductList(productList);
-    }
-  },
-  methods: {
-    sortProductList(productList) {
-      return productList.sort((item, nextItem) => {
-        if (this.$store.state.sortingBy === "default") {
-          return;
-        }
-
-        if (this.$store.state.sortingBy === "name") {
-          if (item.name.toLowerCase() > nextItem.name.toLowerCase()) return 1;
-          if (item.name.toLowerCase() < nextItem.name.toLowerCase()) return -1;
-
-          return 0;
-        }
-
-        if (this.$store.state.sortingBy === "price-desc") {
-          if (item.price > nextItem.price) return -1;
-          if (item.price < nextItem.price) return 1;
-
-          return 0;
-        }
-
-        if (this.$store.state.sortingBy === "price-asc") {
-          if (item.price < nextItem.price) return -1;
-          if (item.price > nextItem.price) return 1;
-
-          return 0;
-        }
-      });
-    }
   }
 };
 </script>
@@ -62,6 +26,7 @@ export default {
 <style lang="scss" scoped>
 .products-content {
   display: flex;
+  justify-content: space-between;
   @media screen and (max-width: $max-width-mobile) {
     flex-direction: column;
     align-items: center;

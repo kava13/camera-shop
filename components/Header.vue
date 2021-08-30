@@ -6,7 +6,7 @@
           Добавление товара
         </div>
         <div class="header-filter">
-          <select name="" id="" @change="changeSortingFilter">
+          <select name="productsFilter" @change="changeSortingFilter">
             <option value="default">По умолчанию</option>
             <option value="name">По алфавиту</option>
             <option value="price-desc">По цене (по убыванию)</option>
@@ -50,12 +50,16 @@ header {
       select {
         border: none;
         color: $grey;
-        font-size: 14px;
-        line-height: 16px;
-        padding: 11px 28px 11px 16px;
+        font-size: 12px;
+        line-height: 15px;
+        padding: 10px 28px 10px 16px;
         background: $primary;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 5px rgb(0 0 0 / 10%);
         border-radius: 4px;
+        appearance: none;
+        background-image: url("/img/arrow.svg");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 16px) center;
       }
     }
   }
