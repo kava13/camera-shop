@@ -13,9 +13,7 @@
       <BaseInput :isPriceInput="true" required :inputValue.sync="formattedPrice" :placeholderText="'Введите цену'" :inputId="'price'">
         Цена товара
       </BaseInput>
-      <button class="add-product-btn" :disabled="!isFormValid" @click.prevent="addProduct">
-        Добавить товар
-      </button>
+      <button class="add-product-btn" :disabled="!isFormValid" @click.prevent="addProduct">Добавить товар</button>
     </form>
   </div>
 </template>
@@ -29,14 +27,14 @@ import BaseTextarea from "/components/base/BaseTextarea";
 export default {
   components: {
     BaseInput,
-    BaseTextarea
+    BaseTextarea,
   },
   data() {
     return {
       name: "",
       description: "",
       imgUrl: "",
-      formattedPrice: ""
+      formattedPrice: "",
     };
   },
   computed: {
@@ -45,7 +43,7 @@ export default {
     },
     priceWithoutFormatting() {
       return parseInt(this.formattedPrice.replace(/\s+/g, ""));
-    }
+    },
   },
   methods: {
     addProduct() {
@@ -55,7 +53,7 @@ export default {
         name: this.name,
         description: this.description,
         priceWithoutFormatting: this.priceWithoutFormatting,
-        formattedPrice: this.formattedPrice
+        formattedPrice: this.formattedPrice,
       };
       this.$store.commit("addProduct", newProduct);
       this.clearInputValues();
@@ -65,8 +63,8 @@ export default {
       this.description = "";
       this.imgUrl = "";
       this.formattedPrice = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -18,8 +18,8 @@ import CardList from "/components/card-list/CardList";
 export default {
   components: {
     FormBlock,
-    CardList
-  }
+    CardList,
+  },
 };
 </script>
 

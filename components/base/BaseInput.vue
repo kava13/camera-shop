@@ -18,16 +18,16 @@ export default {
     inputId: String,
     required: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isPriceInput: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      isInputValueValid: true
+      isInputValueValid: true,
     };
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
       }
 
       return value;
-    }
-  }
+    },
+  },
 };
 </script>

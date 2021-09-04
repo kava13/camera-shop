@@ -1,6 +1,6 @@
 export const state = () => ({
   products: [],
-  sortingBy: "default"
+  sortingBy: "default",
 });
 
 export const mutations = {
@@ -8,9 +8,9 @@ export const mutations = {
     state.products.push(newProduct);
   },
   removeProduct(state, productId) {
-    state.products = state.products.filter(product => product.id !== productId);
+    state.products = state.products.filter((product) => product.id !== productId);
   },
   setSortingBy(state, sortingByValue) {
     state.sortingBy = sortingByValue;
-  }
+  },
 };

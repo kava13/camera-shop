@@ -2,9 +2,7 @@
   <header>
     <div class="container">
       <div class="header-wr">
-        <div class="header-title">
-          Добавление товара
-        </div>
+        <div class="header-title">Добавление товара</div>
         <div class="header-filter">
           <select name="productsFilter" @change="changeSortingFilter">
             <option value="default">По умолчанию</option>
@@ -23,8 +21,8 @@ export default {
   methods: {
     changeSortingFilter() {
       this.$store.commit("setSortingBy", event.target.value);
-    }
-  }
+    },
+  },
 };
 </script>
 
