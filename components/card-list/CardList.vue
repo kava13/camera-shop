@@ -11,24 +11,25 @@ import Card from "/components/card-list/Card";
 
 export default {
   components: {
-    Card
+    Card,
   },
   computed: {
     sortedProductList() {
       let productList = [...this.$store.state.products];
       return this.sortProductList(productList);
-    }
+    },
   },
   methods: {
     sortProductList(productList) {
       if (this.$store.state.sortingBy === "price-desc") return productList.sort((item, nextItem) => nextItem.price - item.price);
       if (this.$store.state.sortingBy === "price-asc") return productList.sort((item, nextItem) => item.price - nextItem.price);
-      if (this.$store.state.sortingBy === "name")
+      if (this.$store.state.sortingBy === "name") {
         return productList.sort((item, nextItem) => item.name.toLowerCase().localeCompare(nextItem.name.toLowerCase()));
+      }
 
       return productList;
-    }
-  }
+    },
+  },
 };
 </script>
 

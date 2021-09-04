@@ -18,17 +18,17 @@
 <script>
 export default {
   props: {
-    product: Object
+    product: Object,
   },
   data() {
     return {
-      isImgLoading: true
+      isImgLoading: true,
     };
   },
   computed: {
     isImgUrlValid() {
       return /^https?:\/\/.*\.(?:jpe?g|gif|png)$/gi.test(this.product.imgUrl);
-    }
+    },
   },
   methods: {
     changeImgLoading() {
@@ -39,8 +39,8 @@ export default {
     },
     removeProduct(productId) {
       this.$store.commit("removeProduct", productId);
-    }
-  }
+    },
+  },
 };
 </script>
 
