@@ -21,8 +21,8 @@
 <script>
 import { nanoid } from "nanoid";
 
-import BaseInput from "/components/base/BaseInput";
-import BaseTextarea from "/components/base/BaseTextarea";
+import BaseInput from "@/components/base/BaseInput.vue";
+import BaseTextarea from "@/components/base/BaseTextarea.vue";
 
 export default {
   components: {
@@ -42,7 +42,7 @@ export default {
       return this.name?.length > 0 && this.imgUrl?.length > 0 && this.formattedPrice?.length > 0;
     },
     priceWithoutFormatting() {
-      return parseInt(this.formattedPrice.replace(/\s+/g, ""));
+      return parseInt(this.formattedPrice.replace(/\s+/g, ""), 10);
     },
   },
   methods: {

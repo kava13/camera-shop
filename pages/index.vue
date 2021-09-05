@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import FormBlock from "/components/FormBlock";
-import CardList from "/components/card-list/CardList";
+import FormBlock from "@/components/FormBlock.vue";
+import CardList from "@/components/card-list/CardList.vue";
 
 export default {
   components: {

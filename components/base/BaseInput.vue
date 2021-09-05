@@ -5,7 +5,7 @@
         <slot></slot>
       </span>
     </label>
-    <input type="text" @input="updateInputValue" :value="inputValue" :placeholder="placeholderText" :id="inputId" />
+    <input :id="inputId" type="text" :value="inputValue" :placeholder="placeholderText" @input="updateInputValue" />
     <div class="error-text">Поле является обязательным</div>
   </div>
 </template>
@@ -13,9 +13,18 @@
 <script>
 export default {
   props: {
-    inputValue: String,
-    placeholderText: String,
-    inputId: String,
+    inputValue: {
+      type: String,
+      required: true,
+    },
+    placeholderText: {
+      type: String,
+      required: true,
+    },
+    inputId: {
+      type: String,
+      required: true,
+    },
     required: {
       type: Boolean,
       default: false,
@@ -32,7 +41,7 @@ export default {
   },
   methods: {
     updateInputValue() {
-      let value = event.target.value;
+      let { value } = event.target;
 
       // Если это инпут с ценой, то форматируем введенное значение
       if (this.isPriceInput) {
@@ -47,25 +56,28 @@ export default {
       this.$emit("update:inputValue", value);
     },
     setIsInputValueValid(inputValue) {
-      this.isInputValueValid = inputValue.length === 0 ? false : true;
+      this.isInputValueValid = inputValue.length !== 0;
     },
-    changePriceFormat(ev, value) {
-      if (value?.length !== 0) {
+    changePriceFormat(event, value) {
+      let finalValue = value;
+      const ev = event;
+
+      if (finalValue?.length !== 0) {
         // Удаляем пробелы
-        let clearValue = value.replace(/\s+/g, "");
+        const clearValue = value.replace(/\s+/g, "");
         // Проверяем только ли цифры в цене (нет ли букв или пробелов)
         const isOnlyNumbers = /^\d+$/.test(clearValue);
 
         // Если введена буква и инпут непустой, то не меняем значение event
-        if (!isOnlyNumbers && value?.length !== 0) {
+        if (!isOnlyNumbers && finalValue?.length !== 0) {
           ev.target.value = this.inputValue;
           return this.inputValue;
         }
 
-        value = new Intl.NumberFormat("ru").format(parseInt(clearValue));
+        finalValue = new Intl.NumberFormat("ru").format(parseInt(clearValue, 10));
       }
 
-      return value;
+      return finalValue;
     },
   },
 };

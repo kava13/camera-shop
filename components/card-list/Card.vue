@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-img">
       <div v-if="isImgLoading" class="card-img__preloader"></div>
-      <img @load="changeImgLoading" :src="isImgUrlValid ? product.imgUrl : '/img/default-img.jpg'" alt="Продукт" />
+      <img :src="isImgUrlValid ? product.imgUrl : '/img/default-img.jpg'" alt="Продукт" @load="changeImgLoading" />
     </div>
     <div class="card-text">
       <div class="card-title">{{ product.name }}</div>
@@ -18,7 +18,10 @@
 <script>
 export default {
   props: {
-    product: Object,
+    product: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

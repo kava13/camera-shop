@@ -1,13 +1,13 @@
 <template>
   <transition-group class="card-list" name="card-list" tag="div">
     <template v-for="item in sortedProductList">
-      <Card :product="item" :key="item.id"></Card>
+      <Card :key="item.id" :product="item"></Card>
     </template>
   </transition-group>
 </template>
 
 <script>
-import Card from "/components/card-list/Card";
+import Card from "@/components/card-list/Card.vue";
 
 export default {
   components: {
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     sortedProductList() {
-      let productList = [...this.$store.state.products];
+      const productList = [...this.$store.state.products];
       return this.sortProductList(productList);
     },
   },
