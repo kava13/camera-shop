@@ -4,12 +4,19 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["eslint:recommended", "airbnb-base", "plugin:vue/essential", "plugin:vue/recommended", "plugin:nuxt/recommended", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "eslint-config-airbnb-base",
+    "plugin:vue/essential",
+    "plugin:vue/recommended",
+    "plugin:nuxt/recommended",
+    "eslint-config-prettier",
+  ],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["vue", "prettier"],
+  plugins: ["eslint-plugin-prettier"],
   rules: {
     "prettier/prettier": ["error"],
     "linebreak-style": 0,
